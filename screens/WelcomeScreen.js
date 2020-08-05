@@ -3,23 +3,21 @@ import {
   View,
   Text,
   StyleSheet,
-  
   Image,
   Dimensions,
+  Animated,
 } from "react-native";
 import { Button } from "react-native-elements";
-
 import { Feather } from "@expo/vector-icons";
 import _ from "lodash";
-
 import { connect } from "react-redux";
+
 import * as actions from "../actions";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 const WelcomeScreen = (props) => {
-
   const loginWithFacebook = async () => {
     props.facebookLogin();
     onAuthComplete(props);
@@ -42,10 +40,30 @@ const WelcomeScreen = (props) => {
     }
   };
 
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1900,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  useEffect(() => {
+    fadeIn();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/logo.png")} />
-      <Text style={styles.text}>Billions of bars.{"\n"} Free on Jabroni</Text>
+      <Animated.View
+        style={{
+          opacity: fadeAnim,
+          alignItems: "center",
+        }}
+      >
+        <Image style={styles.logo} source={require("../assets/logo.png")} />
+        <Text style={styles.text}>Billions of bars.{"\n"} Free on Jabroni</Text>
+      </Animated.View>
 
       <View style={styles.buttonContainer}>
         {/* <Button
@@ -57,7 +75,7 @@ const WelcomeScreen = (props) => {
         <Button
           titleStyle={styles.buttonTitle}
           buttonStyle={styles.buttonStyle}
-          type='clear'
+          type="clear"
           title={"CONTINUE \n WITH FACEBOOK"}
           onPress={() => loginWithFacebook()}
           icon={

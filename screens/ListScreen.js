@@ -7,25 +7,8 @@ import * as actions from "../actions/index";
 import ListCard from "../components/ListCard";
 
 const ListScreen = (props) => {
-  // const [items, setItems] = useState([]);
-
-  // //   // snippet of code should resemble componentWillReceiveProps
-  // const isFirstRun = useRef(true);
-  // useEffect(() => {
-  //   if (isFirstRun.current) {
-  //     isFirstRun.current = false;
-  //     return;
-  //   }
-  //   setItems(props.items);
-
-  // }, [props.items]);
-  //   // snippet of code should resemble componentWillReceiveProps
-
   const deleteItemCallback = (barcode) => {
-    // const filteredData = items.filter((item) => item.barcode !== barcode);
-    // setItems(filteredData);
-
-    props.deleteItem(barcode); // 
+    props.deleteItem(barcode);
   };
 
   return (

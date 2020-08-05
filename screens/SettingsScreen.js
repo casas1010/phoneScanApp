@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Text,
-  StyleSheet,
-  FlatLis,
-  ImageBackground,
-  Dimensions,
-  Button,
-} from "react-native";
+import { StyleSheet, Button,View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import { connect } from "react-redux";
@@ -19,16 +12,17 @@ const SettingsScreen = (props) => {
   };
 
   return (
-
+    <View style={styles.container}>
       <Button title="LogOut" onPress={() => singout()} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  ImageBackground: {
-    flex: 1,
-    alignContent: "center",
-    justifyContent: "center",
+  container: {
+    justifyContent: 'center',
+      alignItems: 'center',
+      height:'100%'
   },
 });
 
@@ -37,6 +31,8 @@ SettingsScreen.navigationOptions = {
   tabBarOptions: {
     activeBackgroundColor: "black",
     inactiveBackgroundColor: "black",
+    
+    
   },
 };
 

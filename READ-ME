@@ -1,2 +1,21 @@
-packages used:
-npm install --save react-navigation
+How to use this sweet app!
+
+Increase the memory that the function barvodeLookUp is allowed on google cloud: https://console.cloud.google.com/functions/list
+
+Create a file named 'service_account.json' in the functions file. This file should have the firebase credentials.
+
+{
+    "type": "service_account",
+    "project_id": "XXX",
+    "private_key_id": "XXX",
+    "private_key": "XXX",
+    "client_email": "XXX",
+    "client_id": "XXX",
+    "auth_uri": "XXX",
+    "token_uri": "XXX",
+    "auth_provider_x509_cert_url": "XXX",
+    "client_x509_cert_url": "XXX"
+  }
+  
+
+  If you have any issues text me at 561-452-5550

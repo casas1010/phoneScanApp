@@ -1,10 +1,6 @@
-import React, { Component, useState, useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 import {
   View,
-  Text,
-  StyleSheet,
-  Button,
-  SafeAreaView,
   AsyncStorage,
 } from "react-native";
 import _ from "lodash";
@@ -13,9 +9,9 @@ import { AppLoading } from "expo";
 import Slides from "../components/Slides";
 
 const SLIDE_DATA = [
-  { text: "Welcome to JobApp", color: "#03A9F4" },
-  { text: "Use this to get a job", color: "#009688" },
-  { text: "Set your location, then swipe away", color: "#03A9F4" },
+  { text: "Welcome to Jabroni", color: "#0000f4" },
+  { text: "Use is app to find the name and barcode of stuff!", color: "#010088" },
+  { text: "Point and scan to get started!", color: "#0000cf" },
 ];
 
 
@@ -24,13 +20,11 @@ const AuthScreen = (props) => {
   const [token, setToken] = useState(null);
 
   useEffect( () => {
-    // AsyncStorage.removeItem('fb_token')         // REMOVE ME!
     checkToken();
   }, []);
 
   const checkToken = async () => {
     let token = await AsyncStorage.getItem("fb_token");
-    // setToken(token);
     if (token) {
       props.navigation.navigate("Scan");
       setToken(token);
@@ -53,6 +47,5 @@ const AuthScreen = (props) => {
     </View>
   );
 };
-const styles = StyleSheet.create({});
 
 export default AuthScreen;

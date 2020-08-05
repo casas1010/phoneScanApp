@@ -1,11 +1,10 @@
 import * as React from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import * as Permissions from "expo-permissions";
-import axios from "axios";
 import { BarCodeScanner } from "expo-barcode-scanner";
-
 import { connect } from "react-redux";
 import * as actions from "../actions/index";
+import ScanAnimation from './ScanAnimation';
 
 class Scan extends React.Component {
   state = {
@@ -40,42 +39,26 @@ class Scan extends React.Component {
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
           style={[StyleSheet.absoluteFillObject, styles.barCode]}
         >
-          <View style={styles.barCodeSight} />
+          {/* <View style={styles.barCodeSight} /> */}
+          <ScanAnimation/>
 
           {scanned && (
-          <Button
-            title={"Tap to Scan Again"}
-            onPress={() => this.setState({ scanned: false })}
-          />
-        )}
+            <Button
+              title={"Tap to Scan Again"}
+              onPress={() => this.setState({ scanned: false })}
+            />
+          )}
         </BarCodeScanner>
-        
       </View>
     );
   }
 
-  handleSubmit = async (data) => {
-    let response;
-    try {
-      response = await axios.post(
-        "https://us-central1-quickstart-1585764879031.cloudfunctions.net/barcodeLookUp",
-        { barCode: data }
-      );
-    } catch (err) {
-      this.setState({ error: err });
-    }
-    return response.data;
-  };
 
   handleBarCodeScanned = async ({ type, data }) => {
     this.setState({ scanned: true });
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    let response = await this.handleSubmit(data);
-    this.props.addItemToList({
-      imageURL: response.imageURL,
-      name: response.name,
-      barcode: data
-    });
+    // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    this.props.getItem(data);
+
   };
 }
 
@@ -92,7 +75,6 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     paddingLeft: 30,
-
     backgroundColor: "transparent",
     borderColor: "white",
     borderWidth: 1,

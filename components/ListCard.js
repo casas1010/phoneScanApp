@@ -1,25 +1,30 @@
-import React, {useEffect} from "react";
-import { View, Image, Text, StyleSheet,TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 // import { connect } from "react-redux";
 // import * as actions from "../actions/index";
 
-const ListCard = ({ imageURL, name, barcode, onPressAction}) => {
+const MAX_LIM = 15
 
-
-
+const ListCard = ({ imageURL, name, barcode, onPressAction }) => {
   return (
     <View style={styles.itemContainer}>
       <Image style={styles.image} source={{ uri: imageURL }} alt={barcode} />
       <View style={styles.textContainer}>
-        <Text style={styles.nameText}>Name: {name}</Text>
+        {/* <Text style={styles.nameText}>Name: {name}</Text> */}
+        <Text style={styles.nameText}>Name: {name.length > MAX_LIM
+            ? name.substring(0, MAX_LIM - 3) + "..."
+            : name}
+        </Text>
+
         <Text style={styles.barcodeText}>Barcode: {barcode}</Text>
       </View>
       <View style={styles.iconContainer}>
-        <TouchableOpacity style={styles.trash} 
-        onPress={()=>onPressAction(barcode)} 
+        <TouchableOpacity
+          style={styles.trash}
+          onPress={() => onPressAction(barcode)}
         >
-          <Feather name="trash"  size={33} color="grey" />
+          <Feather name="trash" size={33} color="grey" />
         </TouchableOpacity>
       </View>
     </View>
@@ -64,5 +69,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListCard
+export default ListCard;
 // export default connect(null, actions)(ListCard);
